@@ -1,0 +1,60 @@
+\documentclass[aspectratio=169]{beamer}
+\usetheme[numbering=fraction]{metropolis}
+%% Layout options
+\setbeamertemplate{frame footer}{\inserttitle} %% Footer with title.
+\setbeamerfont{page number in head/foot}{size=\tiny}
+\setbeamertemplate{bibliography item}{\insertbiblabel} %% Make [1] work in bibliography.
+\setbeamertemplate{caption}{\raggedright\insertcaption\par} %% Remove 'Figure X' from caption.
+
+\input{0itemize.tex}
+
+\usepackage{cancel}
+\usepackage{tikz}
+\usetikzlibrary{tikzmark}
+
+\title{Connecting CoreDNS to Envoy's Discovery Control Plane}
+\date{April/March 2020}
+\author{Miek Gieben (miek@miek.nl) \and Michael Grosser (xxxk@yyy.zzz)}
+\institute{Centre for protobuf Nerding}
+
+\begin{document}
+    \let\oldfootnotesize\footnotesize
+    \renewcommand*{\footnotesize}{\oldfootnotesize\tiny}
+
+    \maketitle
+
+    \section{What's Envoy and Envoy's Discovery Protocol?}
+    \begin{frame}{Envoy}
+
+    \end{frame}
+
+    \begin{frame}{Envoy's Discovery Protocol}
+        \begin{itemize}
+            \item Envoy is dynamically configurable using \emph{Discovery Services} (DS)
+            \item It can:
+            \begin{itemize}
+                \item configure new listeners (open new sockets) $\rightarrow$ Listeners Discovery Service (LDS)
+                \item configure new routes (map \texttt{/api} to \texttt{X}, etc.) $\rightarrow$ Route Discovery Service (RDS)
+                \item configure new clusters (a name + endpoints) $\rightarrow$ Cluster Discovery Service (CDS)
+                \item configure new endpints (address:port) $\rightarrow$ Endpoint Discovery Service (EDS)
+            \end{itemize}
+        \end{itemize}
+
+        All these DSs together are called {\bf xDS}, we care about CDS/EDS
+    \end{frame}
+
+    \begin{frame}{Why do you care?}
+
+    \end{frame}
+
+    \begin{frame}{Management Server}
+
+    \end{frame}
+
+    \section{CoreDNS with \emph{traffic}}
+
+    \begin{frame}{Setup for Demo}
+        \includegraphics[width=0.6\textwidth, angle=0]{xds-overview.pdf}
+    \end{frame}
+
+\end{document}

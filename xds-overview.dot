@@ -1,0 +1,28 @@
+digraph xds_overview {
+    bgcolor="transparent"
+    subgraph sub_web_us {
+        label="web US";
+        node[shape=record]
+        web_us [label="<f0> 192.168.1.1:443\n192.168.1.2:443\n\n"];
+    }
+    subgraph sub_web_eu {
+        label="web EU";
+        node[shape=record]
+        web_eu [label="<f0> 172.168.0.1:443\n172.168.0.2:443\n\n"];
+    }
+    subgraph sub_xds {
+        xds [label="{<f0> xds|<f1> \"Envoy\" Management Server\n\n}" shape=Mrecord];
+    }
+    subgraph sub_hc {
+        hc [label="{<f0> hc|<f1> Health Check Server\n\n}" shape=Mrecord];
+    }
+    subgraph sub_coredns {
+        coredns [label="{<f0> dns|<f1> CoreDNS\n\n}" shape=Mrecord];
+    }
+    {rank=same; web_us, web_eu}
+
+    hc -> xds
+    xds -> hc
+    xds -> coredns
+    hc -> web_eu, web_us
+}
