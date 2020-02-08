@@ -8,7 +8,7 @@ digraph xds_overview {
     subgraph sub_web_eu {
         label="web EU";
         node[shape=record]
-        web_eu [label="<f0> 172.168.0.1:443\n172.168.0.2:443\n\n"];
+        web_eu [label="<f0> 172.16.0.1:443\n172.16.0.2:443\n\n"];
     }
     subgraph sub_xds {
         xds [label="{<f0> xds|<f1> \"Envoy\" Management Server\n\n}" shape=Mrecord];
