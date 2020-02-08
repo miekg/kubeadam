@@ -46,14 +46,21 @@
 
     \end{frame}
 
-    \begin{frame}{Management Server}
-
-    \end{frame}
-
     \section{CoreDNS with \emph{traffic}}
 
     \begin{frame}{Setup for Demo}
-        \includegraphics[width=0.6\textwidth, angle=0]{xds-overview.pdf}
+        \begin{columns}
+            \begin{column}{0.5\textwidth}
+                \includegraphics[width=1.0\textwidth, angle=0]{xds-overview.pdf}
+            \end{column}
+            \begin{column}{0.5\textwidth}
+                \begin{description}
+                    \item[hc] not available - will be faked in the demo
+                    \item[xds] \url{github.com/miekg/xds} - Go binary
+                    \item[xdsctl] \url{github.com/miekg/xds} - Go binary
+                \end{description}
+            \end{column}
+        \end{columns}
     \end{frame}
 
     \section{Demo}

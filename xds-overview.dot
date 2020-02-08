@@ -19,10 +19,15 @@ digraph xds_overview {
     subgraph sub_coredns {
         coredns [label="{<f0> dns|<f1> CoreDNS\n\n}" shape=Mrecord];
     }
+    subgraph sub_xdsctl {
+        xdsctl [label="{<f0> cli|<f1> xdsctl\n\n}" shape=Mrecord];
+    }
     {rank=same; web_us, web_eu}
+    {rank=same; coredns, xdsctl}
 
     hc -> xds
     xds -> hc
     xds -> coredns
+    xds -> xdsctl
     hc -> web_eu, web_us
 }
