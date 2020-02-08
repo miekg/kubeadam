@@ -1,3 +1,5 @@
+all: xds-overview.pdf xds.pdf
+
 xds.pdf: *.tex *.dot
 	xelatex xds.tex
 	xelatex xds.tex

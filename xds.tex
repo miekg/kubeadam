@@ -8,9 +8,8 @@
 
 \input{0itemize.tex}
 
+\usepackage{verbatimbox, stackengine}
 \usepackage{cancel}
-\usepackage{tikz}
-\usetikzlibrary{tikzmark}
 
 \title{Connecting CoreDNS to Envoy's Discovery Control Plane}
 \date{April/March 2020}
@@ -55,6 +54,42 @@
 
     \begin{frame}{Setup for Demo}
         \includegraphics[width=0.6\textwidth, angle=0]{xds-overview.pdf}
+    \end{frame}
+
+    \section{Demo}
+    \begin{frame}[fragile]
+
+        \begin{verbatim}
+        % xdsctl ls
+        CLUSTER   VERSION   TYPE   METADATA
+        web       1         EDS
+        \end{verbatim}
+
+        \begin{verbatim}
+        % xdsctl ls web
+        CLUSTER   VERSION   ENDPOINT          LOCALITY   HEALTH    WEIGHT
+        web       1         192.168.1.1:443   us         HEALTHY   0
+        web       1         192.168.1.2:443   us         HEALTHY   0
+        web       1         172.16.0.1:443    eu         HEALTHY   0
+        web       1         172.16.0.2:443    eu         HEALTHY   0
+        \end{verbatim}
+
+    \end{frame}
+
+    \begin{frame}[fragile]
+
+        \begin{verbbox}
+        % xdsctl drain web 192.168.1.1:443
+        % xdsctl ls web
+        CLUSTER   VERSION   ENDPOINT          LOCALITY   HEALTH     WEIGHT
+        web       2         192.168.1.1:443   us         DRAINING   0
+        web       2         192.168.1.2:443   us         HEALTHY    0
+        web       2         172.16.0.1:443    eu         HEALTHY    0
+        web       2         172.16.0.2:443    eu         HEALTHY    0
+        \end{verbbox}
+        \stackinset{l}{108pt}{b}{13pt}{ {\setlength{\fboxrule}{2.8pt}} {\framebox(15,65){}}}{%
+\stackinset{c}{2pt}{c}{-38pt}{\textcolor{red}{\framebox(230,46){}}}{\theverbbox}}
+
     \end{frame}
 
 \end{document}
