@@ -32,10 +32,10 @@
             \item Envoy is dynamically configurable using \emph{Discovery Services} (DS)
             \item It can:
             \begin{itemize}
-                \item configure new listeners (open new sockets) $\rightarrow$ Listeners Discovery Service (LDS)
-                \item configure new routes (map \texttt{/api} to \texttt{X}, etc.) $\rightarrow$ Route Discovery Service (RDS)
-                \item configure new clusters (a name + endpoints) $\rightarrow$ Cluster Discovery Service (CDS)
-                \item configure new endpints (address:port) $\rightarrow$ Endpoint Discovery Service (EDS)
+                \item configure new listeners (open new sockets) $\rightarrow$ Listeners Discovery Service (\emph{L}DS)
+                \item configure new routes (map \texttt{/api} to \texttt{X}, etc.) $\rightarrow$ Route Discovery Service (\emph{R}DS)
+                \item configure new clusters (a name + endpoints) $\rightarrow$ Cluster Discovery Service (\emph{C}DS)
+                \item configure new endpints (address:port) $\rightarrow$ Endpoint Discovery Service (\emph{E}DS)
             \end{itemize}
         \end{itemize}
 
@@ -58,20 +58,28 @@
 
     \section{Demo}
     \begin{frame}[fragile]
-
         \begin{verbatim}
-        % xdsctl ls
-        CLUSTER   VERSION   TYPE   METADATA
-        web       1         EDS
+% xds
+[INFO] Initialized cache with 'v1' of 1 cluster parsed
+from directory: "."
+[INFO] Management server listening on :18000
         \end{verbatim}
 
         \begin{verbatim}
-        % xdsctl ls web
-        CLUSTER   VERSION   ENDPOINT          LOCALITY   HEALTH    WEIGHT
-        web       1         192.168.1.1:443   us         HEALTHY   0
-        web       1         192.168.1.2:443   us         HEALTHY   0
-        web       1         172.16.0.1:443    eu         HEALTHY   0
-        web       1         172.16.0.2:443    eu         HEALTHY   0
+% xdsctl ls
+CLUSTER  VERSION  TYPE  METADATA
+web      1        EDS
+        \end{verbatim}
+    \end{frame}
+
+    \begin{frame}[fragile]
+        \begin{verbatim}
+% xdsctl ls web
+CLUSTER  VERSION  ENDPOINT        LOCALITY  HEALTH   WEIGHT
+web      1        192.168.1.1:80  us        HEALTHY  0
+web      1        192.168.1.2:80  us        HEALTHY  0
+web      1        172.16.0.1:80   eu        HEALTHY  0
+web      1        172.16.0.2:80   eu        HEALTHY  0
         \end{verbatim}
 
     \end{frame}
@@ -79,16 +87,34 @@
     \begin{frame}[fragile]
 
         \begin{verbbox}
-        % xdsctl drain web 192.168.1.1:443
-        % xdsctl ls web
-        CLUSTER   VERSION   ENDPOINT          LOCALITY   HEALTH     WEIGHT
-        web       2         192.168.1.1:443   us         DRAINING   0
-        web       2         192.168.1.2:443   us         HEALTHY    0
-        web       2         172.16.0.1:443    eu         HEALTHY    0
-        web       2         172.16.0.2:443    eu         HEALTHY    0
+% xdsctl drain web 192.168.1.1:80
+% xdsctl ls web
+CLUSTER  VERSION  ENDPOINT        LOCALITY  HEALTH    WEIGHT
+web      2        192.168.1.1:80  us        DRAINING  0
+web      2        192.168.1.2:80  us        HEALTHY   0
+web      2        172.16.0.1:80   eu        HEALTHY   0
+web      2        172.16.0.2:80   eu        HEALTHY   0
         \end{verbbox}
-        \stackinset{l}{108pt}{b}{13pt}{ {\setlength{\fboxrule}{2.8pt}} {\framebox(15,65){}}}{%
-\stackinset{c}{2pt}{c}{-38pt}{\textcolor{red}{\framebox(230,46){}}}{\theverbbox}}
+        \stackinset{l}{53pt}{b}{12pt}{{\framebox(55,78){}}}{%
+        \stackinset{l}{285pt}{b}{58pt}{{\framebox(62,18){}}}{\theverbbox}%
+        }
+
+    \end{frame}
+
+    \begin{frame}[fragile]
+
+        \begin{verbbox}
+% xdsctl undrain web 192.168.1.1:80
+% xdsctl ls web
+CLUSTER  VERSION  ENDPOINT        LOCALITY  HEALTH   WEIGHT
+web      3        192.168.1.1:80  us        UNKNOWN  0
+web      3        192.168.1.2:80  us        HEALTHY  0
+web      3        172.16.0.1:80   eu        HEALTHY  0
+web      3        172.16.0.2:80   eu        HEALTHY  0
+        \end{verbbox}
+        \stackinset{l}{53pt}{b}{12pt}{{\framebox(55,78){}}}{%
+        \stackinset{l}{285pt}{b}{58pt}{{\framebox(62,18){}}}{\theverbbox}%
+        }
 
     \end{frame}
 
