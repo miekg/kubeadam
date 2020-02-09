@@ -1,9 +1,9 @@
 digraph xds_bin {
   node[fontsize=15, color = black, shape = box, width=2, height=1] ;
-  a[label="read clusters on startup", group="1",penwidth=3];
-  b[label="update state",penwidth=3];
-  c[label="update versions",penwidth=3];
-  d[label="push out changes",penwidth=3] ;
+  a[label="Read clusters on startup", group="1",penwidth=2];
+  b[label="Update state",penwidth=2];
+  c[label="Update versions",penwidth=2];
+  d[label="Push out changes",penwidth=2] ;
   {rank =same; c[group=2]; d[group=2]}
 
   a->b->c->d;
