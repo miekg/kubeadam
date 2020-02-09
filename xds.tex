@@ -50,13 +50,7 @@
     \end{frame}
 
     \begin{frame}{ADS}
-        Protocol uses 2 gRPC messages (\texttt{DiscoveryRequest}/\texttt{DiscoveryResponse}).
-        You either:
-        \begin{itemize}
-            \item call a service, i.e. \texttt{FetchEndpoints}
-            \item bidirectional stream + indicate type $\rightarrow$ Aggregated Discovery Service (\emph{A}DS)
-        \end{itemize}
-
+        Protocol uses 2 gRPC messages.
         \begin{columns}[T]
             \begin{column}{0.5\textwidth}
                 \lstinputlisting[language=proto]{discovery-request.proto}
@@ -65,6 +59,14 @@
                 \lstinputlisting[language=proto]{discovery-response.proto}
             \end{column}
         \end{columns}
+
+        You either:
+
+        \begin{itemize}
+            \item call a service, i.e. \texttt{FetchEndpoints}
+            \item bidirectional stream + indicate type $\rightarrow$ Aggregated Discovery Service (\emph{A}DS)
+        \end{itemize}
+
     \end{frame}
 
     \begin{frame}[plain]{\texttt{xds} Control Loop}
