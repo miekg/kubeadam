@@ -1,15 +1,17 @@
 CoreDNS is a DNS server
 
-What is Envoy?
+What is Envoy? - TODO
 
+** DONE
 What is Envoy's Discovery protcols?
 called xDS
 involved, LDS, RDS, CDS, EDS
-LRS and HRS
 
-ADS - bi-directional streaming
+** TODO: LRS and HRS
 
-Why do you care?
+** DONE: ADS - bi-directional streaming
+
+** TODO: Why do you care?
 
 Sketch problem? Two cluster, 1 service split between the two (independent deploys - dont really
 care).
@@ -25,7 +27,7 @@ traffic to be steered away.
 FOr the second use case I (SRE) wants to upgrade the cluster (of course this always works fine but
 Im cautious here). So want to DRAIN ALL Services from cluster B.
 
-Why Envoy xDS
+**TODO: Why Envoy xDS
 
 * it's a sane protocol - gRPC based.
 * other are moving to it as well (gRPC)
