@@ -45,11 +45,13 @@
             \end{itemize}
         \end{itemize}
 
-        All these DSs together are called {\bf xDS}, we care about CDS/EDS
+        All these DSs together are called {\bf xDS}, we care about CDS/EDS.\footnote{Resporting Services also exist: Health and Load
+        Reporting: HRS, LRS - not covered in this presentation.}
     \end{frame}
 
     \begin{frame}{ADS}
-        Protocol uses 2 gRPC messages, you either
+        Protocol uses 2 gRPC messages (\texttt{DiscoveryRequest}/\texttt{DiscoveryResponse}).
+        You either:
         \begin{itemize}
             \item call a service, i.e. \texttt{FetchEndpoints}
             \item bidirectional stream + indicate type $\rightarrow$ Aggregated Discovery Service (\emph{A}DS)
@@ -74,6 +76,25 @@
                 Anything implementing ADS can subscribe to the feed
             \end{column}
         \end{columns}
+    \end{frame}
+
+    \begin{frame}{Why do you want this?}
+        We have (Kubernetes) cluster. Treat them as failure domains.
+        \begin{enumerate}
+            \item Services breaks in single cluster; drain service
+            \item Entire cluster fails; drain \emph{all} services
+        \end{enumerate}
+        Just external DNS won't cut it. You need a control plane.
+    \end{frame}
+
+    \begin{frame}{Why xDS?}
+        \begin{enumerate}
+            \item It's a sane and simple protocol
+            \item Emerging as industry standard?
+            \item gRPC itself is moving towards it (with goodies like load reporting and health checking)
+            \item You're already using it if you installed Contour
+        \end{enumerate}
+        If you don't have a fancy protocol (gRPC), why not use DNS for all those "legacy" protocols?
     \end{frame}
 
     \section{CoreDNS with \emph{traffic}}

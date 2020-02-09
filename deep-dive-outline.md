@@ -1,45 +1,10 @@
-CoreDNS is a DNS server
+CoreDNS is a DNS server - TODO
+
+Ordering of the content - TODO
 
 What is Envoy? - TODO
 
-** DONE
-What is Envoy's Discovery protcols?
-called xDS
-involved, LDS, RDS, CDS, EDS
-
-** TODO: LRS and HRS
-
-** DONE: ADS - bi-directional streaming
-
-** TODO: Why do you care?
-
-Sketch problem? Two cluster, 1 service split between the two (independent deploys - dont really
-care).
-
-Now 2 things I want to focus on:
-
-* Service breaks unintentially in (cluster A)
-* Cluster break intentially (maintenance) (cluster B)
-
-First case you want not to steer traffic to A, so healthchecking should spot this and allow for
-traffic to be steered away.
-
-FOr the second use case I (SRE) wants to upgrade the cluster (of course this always works fine but
-Im cautious here). So want to DRAIN ALL Services from cluster B.
-
-**TODO: Why Envoy xDS
-
-* it's a sane protocol - gRPC based.
-* other are moving to it as well (gRPC)
-* would be nice to have legacy client support (HTTP resolved via DNS) (CoreDNS)
-
-Envoy xDS helps, having that data in DNS helps legacy clients (no GRPC)
-
-Components needed - sketch this out
-
-xds coredns
-healthcheckers, admin server
-
+TODO (but partially included)
 Show flow of data
 
 DEMO
