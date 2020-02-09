@@ -1,0 +1,7 @@
+message DiscoveryRequest {
+  version_info = 1;
+  node = 2;
+  resource_names = 3;
+  type_url = 4;
+  response_nonce = 5;
+}

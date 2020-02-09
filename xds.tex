@@ -9,12 +9,17 @@
 \input{0itemize.tex}
 
 \usepackage{verbatimbox, stackengine}
-\usepackage{cancel}
+\usepackage{listings}
 
 \title{Connecting CoreDNS to Envoy's Discovery Control Plane}
 \date{April/March 2020}
 \author{Miek Gieben (miek@miek.nl) \and Michael Grosser (xxxk@yyy.zzz)}
 \institute{Centre for protobuf Nerding}
+
+\lstdefinelanguage{proto}{
+    morekeywords={version_info, type_url, DiscoveryRequest, DiscoveryResponse},
+    basicstyle=\small,
+}
 
 \begin{document}
     \let\oldfootnotesize\footnotesize
@@ -43,14 +48,24 @@
     \end{frame}
 
     \begin{frame}{ADS}
-        All these DSs together are called {\bf xDS}, we care about CDS/EDS
+        Protocol uses 2 gRPC messages, you either
         \begin{itemize}
-            \end{itemize}
+            \item call a service, i.e. \texttt{FetchEndpoints}
+            \item bidirectional stream + indicate type $\rightarrow$ Aggregated Discovery Service (\emph{A}DS)
         \end{itemize}
+
+        \begin{columns}[T]
+            \begin{column}{0.5\textwidth}
+                \lstinputlisting[language=proto]{discovery-request.proto}
+            \end{column}
+            \begin{column}{0.5\textwidth}
+                \lstinputlisting[language=proto]{discovery-response.proto}
+            \end{column}
+        \end{columns}
     \end{frame}
 
-    \begin{frame}{Why do you care?}
-
+    \begin{frame}{\texttt{xds} Control Loop}
+            \includegraphics[scale=0.6]{xds-bin.pdf}
     \end{frame}
 
     \section{CoreDNS with \emph{traffic}}

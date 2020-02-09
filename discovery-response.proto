@@ -1,0 +1,6 @@
+message DiscoveryResponse {
+  version_info = 1;
+  resources = 2;
+  type_url = 4;
+  nonce = 5;
+}
