@@ -42,6 +42,13 @@
         All these DSs together are called {\bf xDS}, we care about CDS/EDS
     \end{frame}
 
+    \begin{frame}{ADS}
+        All these DSs together are called {\bf xDS}, we care about CDS/EDS
+        \begin{itemize}
+            \end{itemize}
+        \end{itemize}
+    \end{frame}
+
     \begin{frame}{Why do you care?}
 
     \end{frame}
@@ -49,18 +56,35 @@
     \section{CoreDNS with \emph{traffic}}
 
     \begin{frame}{Setup for Demo}
-        \begin{columns}
-            \begin{column}{0.5\textwidth}
-                \includegraphics[width=1.0\textwidth, angle=0]{xds-overview.pdf}
-            \end{column}
-            \begin{column}{0.5\textwidth}
-                \begin{description}
-                    \item[hc] not available - will be faked in the demo
-                    \item[xds] \url{github.com/miekg/xds} - Go binary
-                    \item[xdsctl] \url{github.com/miekg/xds} - Go binary
-                \end{description}
-            \end{column}
-        \end{columns}
+            \includegraphics[scale=0.6]{xds-overview.pdf}
+    \end{frame}
+
+    \begin{frame}{}
+        \begin{description}
+            \item[hc]
+                \begin{itemize}
+                    \item Not available in this presentation
+                    \item Will be done manually in this presentation
+                \end{itemize}
+            \item[xds]
+                \begin{itemize}
+                    \item \texttt{xds} - Main control plane component
+                    \item Go binary that implements Envoy xDS v3
+                    \item \url{github.com/miekg/xds}
+                \end{itemize}
+            \item[cli]
+                \begin{itemize}
+                    \item \texttt{xdsctl} - CLI to manipulate \texttt{xds}, this is what oncallers to use
+                    \item Go binary that implements Envoy xDS v3 client side
+                    \item \url{github.com/miekg/xds/tree/master/cmd/xdsctl}
+                \end{itemize}
+            \item[dns]
+                \begin{itemize}
+                    \item \texttt{CoreDNS} - with \emph{traffic} plugin
+                    \item Go binary that implements Envoy xDS v3 ADS
+                    \item \url{github.com/coredns/coredns/tree/traffic}
+                \end{itemize}
+        \end{description}
     \end{frame}
 
     \section{Demo}

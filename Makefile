@@ -1,4 +1,4 @@
-FONTS:=-Nfontname="Fira Sans" -Nfontsize=36 -Efontname="Fira Sans" -Efontsize=36 -Gfontname="Fira Sans" -Gfontsize=36
+FONTS:=-Nfontname="Fira Sans" -Nfontsize=12 -Efontname="Fira Sans" -Efontsize=12 -Gfontname="Fira Sans" -Gfontsize=12
 
 all: xds-overview.pdf xds.pdf
 

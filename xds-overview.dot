@@ -2,13 +2,13 @@ digraph xds_overview {
     bgcolor="transparent"
     subgraph sub_web_us {
         label="web US";
-        node[shape=record]
-        web_us [label="<f0> 192.168.1.1:443\n192.168.1.2:443\n\n"];
+        node[shape=oval]
+        web_us [label="US Cluster\n\n192.168.1.1:80\n192.168.1.2:80\n\n"];
     }
     subgraph sub_web_eu {
         label="web EU";
-        node[shape=record]
-        web_eu [label="<f0> 172.16.0.1:443\n172.16.0.2:443\n\n"];
+        node[shape=oval]
+        web_eu [label="EU Cluster\n\n172.16.0.1:80\n172.16.0.2:80\n\n"];
     }
     subgraph sub_xds {
         xds [label="{<f0> xds|<f1> \"Envoy\" Management Server\n\n}" shape=Mrecord];
