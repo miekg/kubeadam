@@ -2,25 +2,25 @@ digraph xds_overview {
     bgcolor="transparent"
     subgraph sub_web_us {
         label="web US";
-        node[shape=oval]
+        node[shape=oval,penwidth=3]
         web_us [label="US Cluster\n\n192.168.1.1:80\n192.168.1.2:80\n\n"];
     }
     subgraph sub_web_eu {
         label="web EU";
-        node[shape=oval]
+        node[shape=oval,penwidth=3]
         web_eu [label="EU Cluster\n\n172.16.0.1:80\n172.16.0.2:80\n\n"];
     }
     subgraph sub_xds {
-        xds [label="{<f0> xds|<f1> \"Envoy\" Management Server\n\n}" shape=Mrecord];
+        xds [label="{<f0> xds|<f1> \"Envoy\" Management Server\n\n}" shape=Mrecord,penwidth=3];
     }
     subgraph sub_hc {
-        hc [label="{<f0> hc|<f1> Health Check Server\n\n}" shape=Mrecord];
+        hc [label="{<f0> hc|<f1> Health Check Server\n\n}" shape=Mrecord,penwidth=3];
     }
     subgraph sub_coredns {
-        coredns [label="{<f0> dns|<f1> CoreDNS\n\n}" shape=Mrecord];
+        coredns [label="{<f0> dns|<f1> CoreDNS\n\n}" shape=Mrecord,penwidth=3];
     }
     subgraph sub_xdsctl {
-        xdsctl [label="{<f0> cli|<f1> xdsctl\n\n}" shape=Mrecord];
+        xdsctl [label="{<f0> cli|<f1> xdsctl\n\n}" shape=Mrecord,penwidth=3];
     }
     {rank=same; web_us, web_eu}
     {rank=same; coredns, xdsctl}

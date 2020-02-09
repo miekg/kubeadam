@@ -64,8 +64,15 @@
         \end{columns}
     \end{frame}
 
-    \begin{frame}{\texttt{xds} Control Loop}
-            \includegraphics[scale=0.6]{xds-bin.pdf}
+    \begin{frame}[plain]{\texttt{xds} Control Loop}
+        \begin{columns}
+            \begin{column}{0.5\textwidth}
+                \includegraphics[scale=0.6]{xds-bin.pdf}
+            \end{column}
+            \begin{column}{0.5\textwidth}
+                Anything implementing ADS can subscribe to the feed
+            \end{column}
+        \end{columns}
     \end{frame}
 
     \section{CoreDNS with \emph{traffic}}
@@ -162,6 +169,21 @@ web      3        172.16.0.2:80   eu        HEALTHY  0
         \stackinset{l}{285pt}{b}{58pt}{{\framebox(62,18){}}}{\theverbbox}%
         }
 
+    \end{frame}
+
+    \begin{frame}{Remaining Items}
+        Work that remains consists out of
+        \begin{itemize}
+            \item Writing Go binary for health checking
+            \item Localization support in \texttt{xds} and \emph{traffic}
+            \item Fail safe: all endpoints are unhealtly $\rightarrow$ assume HC failure?
+            \item Drain state, while discovering new endpoints.
+            \item Authn/authz?
+        \end{itemize}
+
+        DNS disobeyers. Clients don't refresh their assignment, so will break at some point.
+        This is why TTL was invented.
+        Delays and interaction with DNS TTL and our 10s cycle.
     \end{frame}
 
 \end{document}

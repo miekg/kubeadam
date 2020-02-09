@@ -1,29 +1,12 @@
-digraph g1 {
-  graph [splines=false];
-
-  // invisible nodes
-//  node[ shape = point, width=0, height=0] ;
-//  i1 [ style="invis"];
-//  i2 [ style="invis"];
-//  i3 [ style="invis"];
-//  i4 [ style="invis"];
-
+digraph xds_bin {
   node[fontsize=15, color = black, shape = box, width=2, height=1] ;
-  a[label="read clusters on startup" pos="0,0!"];
-  b[label="update state" pos="0,1!"];
-  c[label="update versions "];
-  d[label="push out changes"] ;
+  a[label="read clusters on startup", group="1",penwidth=3];
+  b[label="update state",penwidth=3];
+  c[label="update versions",penwidth=3];
+  d[label="push out changes",penwidth=3] ;
+  {rank =same; c[group=2]; d[group=2]}
 
-//  d:s -> b:s[label=" ~every 10s\n\n",minlen=7, constraint=false];
+  a->b->c->d;
 
-//  c -> i1[arrowhead=none];
-//  i1 -> d[label="  ~every 10s\n\n"];
-//  d -> i2[arrowhead=none];
-//
-
-//  b -> i4[style="invis"];
-//  i4 -> i3[arrowhead=none];
-
-//  {rank=same; i4 -> i1};
-
+  d->b[label="every 10s\n\n",constraint=false];
 }
