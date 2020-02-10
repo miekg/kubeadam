@@ -111,6 +111,13 @@
 
     \section{CoreDNS with \emph{traffic}}
 
+    \begin{frame}{Caveats}
+        This is DNS, you're not changing actual routing
+        At mercy of clients holding to IPs
+        With 5s TTL you should so sharp drop off in 5 - 10m
+        You're doing it to protect client; if they don't care; they will get broken
+    \end{frame}
+
     \begin{frame}{Setup for Demo}
             \includegraphics[scale=0.6]{xds-overview.pdf}
     \end{frame}
@@ -120,7 +127,7 @@
             \item[hc]
                 \begin{itemize}
                     \item Not available in this presentation
-                    \item Will be done manually in this presentation
+                    \item Will be done manually with \texttt{xdsctl}
                 \end{itemize}
             \item[xds]
                 \begin{itemize}
