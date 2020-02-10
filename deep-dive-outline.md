@@ -1,8 +1,4 @@
-CoreDNS is a DNS server - TODO
-
 Ordering of the content - TODO
-
-What is Envoy? - TODO
 
 TODO (but partially included)
 Show flow of data

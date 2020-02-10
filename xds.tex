@@ -29,8 +29,18 @@
     \maketitle
 
     \section{What's Envoy and Envoy's Discovery Protocol?}
-    \begin{frame}{Envoy}
-
+    \begin{frame}{Envoy and CoreDNS}
+        \begin{itemize}
+            \item Envoy is L7 HTTP server/proxy/load balancer written in C++
+            \item Started in Lyft - it does things right
+            \item Among others it's dynamic configuration (protocol)
+        \end{itemize}
+        Would love to see Caddy (Go HTTP server/proxy/load balancer) v2 implement the same API.
+        \begin{itemize}
+            \item CoreDNS is a DNS server written in Go
+            \item Community project
+            \item Using plugin architecture making it extremely flexible
+        \end{itemize}
     \end{frame}
 
     \begin{frame}{Envoy's Discovery Protocol}
