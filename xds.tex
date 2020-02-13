@@ -26,6 +26,10 @@
 
     \maketitle
 
+    \begin{frame}{test}
+        \includegraphics[scale=0.6]{xds-proto.eps}
+    \end{frame}
+
     \section{What's Envoy and Envoy's Discovery Protocol?}
     \begin{frame}{Envoy and CoreDNS}
         \begin{itemize}
@@ -227,6 +231,7 @@ web      3        172.16.0.2:80   eu        HEALTHY  0
             \item Fail safe: all endpoints are unhealtly $\rightarrow$ assume HC failure?
             \item Drain state, while discovering new endpoints.
             \item Authn/authz?
+            \item Canarying - done as "global" boolean in DiscoveryResponse, implies whole cluster canarying? What does that mean?
         \end{itemize}
 
         DNS disobeyers. Clients don't refresh their assignment, so will break at some point.
