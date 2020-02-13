@@ -226,7 +226,7 @@ web      3        172.16.0.2:80   eu        HEALTHY  0
             \item Localization support in \texttt{xds} and \emph{traffic}
             \item Fail safe: all endpoints are unhealtly $\rightarrow$ assume HC failure?
             \item Drain state, while discovering new endpoints.
-            \item Authn/authz?
+            \item Authn/authz (skipped this in this xds implementation)
         \end{itemize}
 
         DNS disobeyers. Clients don't refresh their assignment, so will break at some point.
@@ -235,9 +235,11 @@ web      3        172.16.0.2:80   eu        HEALTHY  0
     \end{frame}
 
     \begin{frame}{Other options}
+        \begin{itemize}
         Of course you don't have to load balance?
         Once in xDS form you can change \emph{traffic} yourself to do what you want, just serve
         the data -> external DNS done.
+        \end{itemize}
     \end{frame}
 
 \end{document}
