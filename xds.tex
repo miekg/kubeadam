@@ -35,43 +35,36 @@
         \begin{itemize}
             \item Envoy is L7 HTTP server/proxy/load balancer written in C++
             \item Started in Lyft - it does things right
-            \item Among others it's dynamic configuration (protocol)
+            \item Among others it's dynamic configuration (protocol) is good
         \end{itemize}
-        Would love to see Caddy (Go HTTP server/proxy/load balancer) v2 implement the same API.
+
         \begin{itemize}
-            \item CoreDNS is a DNS server written in Go\footnote{Originally based off of Caddy}
+            \item CoreDNS is a DNS server written in Go\footnote{Originally based off of Caddy, url{https://caddyserver.com}}
             \item Community project
             \item Using plugin architecture, making it extremely flexible
         \end{itemize}
     \end{frame}
 
-    \begin{frame}{Another Service Mesh?}
-        No, this is not a service mesh; these are simple, single use components (KISS and Unix principle apply). That you can use
-        to build something
-        \begin{enumerate}
-            \item You can understand
-            \item Implement a global software load balancer
-        \end{enumerate}
-    \end{frame}
-
     \begin{frame}{Envoy's Discovery Protocol}
         \begin{itemize}
             \item Envoy is dynamically configurable using \emph{Discovery Services} (DS)
-            \item It can:
+            \item It can configure
             \begin{itemize}
-                \item configure new listeners (open new sockets) $\rightarrow$ Listeners Discovery Service (\emph{L}DS)
-                \item configure new routes (map \texttt{/api} to \texttt{X}, etc.) $\rightarrow$ Route Discovery Service (\emph{R}DS)
-                \item configure new clusters (a name + endpoints) $\rightarrow$ Cluster Discovery Service (\emph{C}DS)
-                \item configure new endpints (address:port) $\rightarrow$ Endpoint Discovery Service (\emph{E}DS)
+                \item listeners (open new sockets)$\rightarrow$ Listeners Discovery Service (\emph{L}DS)
+                \item routes (map \texttt{/api} to \texttt{X}, etc.) $\rightarrow$ Route Discovery Service (\emph{R}DS)
+                \item clusters (a name + endpoints) $\rightarrow$ Cluster Discovery Service (\emph{C}DS)
+                \item endpints (address:port) $\rightarrow$ Endpoint Discovery Service (\emph{E}DS)
             \end{itemize}
         \end{itemize}
 
         All these DSs together are called {\bf xDS}, we care about CDS/EDS.\footnote{Resporting Services also exist: Health and Load
         Reporting: HRS, LRS - not covered in this presentation.}
+
+        xDS client/server protocol, but bidirectional stream variant exists: \emph{A}DS -- Aggregated Discovery Service
     \end{frame}
 
-    \begin{frame}{ADS}
-        Protocol uses 2 gRPC messages.
+    \begin{frame}{Why Is This a Good Protocol}
+        Simple (~2 gRPC messages), packed with features. TODO(miek): more.
         \begin{columns}[T]
             \begin{column}{0.5\textwidth}
                 \lstinputlisting[language=proto]{discovery-request.proto}
@@ -84,11 +77,20 @@
         You either:
 
         \begin{itemize}
-            \item call a service, i.e. \texttt{FetchEndpoints}
-            \item bidirectional stream + indicate type $\rightarrow$ Aggregated Discovery Service (\emph{A}DS)
+            \item call a service, i.e. \texttt{FetchEndpoints} (xDS)
+            \item bidirectional stream + indicate type \texttt{type_url} (ADS)
         \end{itemize}
-
     \end{frame}
+
+    \begin{frame}{Wait? Another Service Mesh?}
+        No, this is not a service mesh; these are simple, single use components (KISS and Unix principle apply). That you can use
+        to build something
+        \begin{enumerate}
+            \item You can understand
+            \item Implement a global software load balancer
+        \end{enumerate}
+    \end{frame}
+
 
     \begin{frame}[plain]{\texttt{xds} Control Loop}
         \begin{columns}
