@@ -35,7 +35,7 @@
         \end{itemize}
 
         \begin{itemize}
-            \item CoreDNS is a DNS server written in Go\footnote{Originally based off of Caddy, url{https://caddyserver.com}}
+            \item CoreDNS is a DNS server written in Go\footnote{Originally based off of Caddy, \url{https://caddyserver.com}}
             \item Community project
             \item Using plugin architecture, making it extremely flexible
         \end{itemize}
@@ -44,16 +44,16 @@
     \begin{frame}{Traditional Load Balancing}
         \includegraphics[scale=0.45]{traditional_lb.pdf}
 
-        The traffic traverses the proxy \emph{twice}
+        Traffic traverses the proxy \emph{twice}.
     \end{frame}
 
     \begin{frame}{Lookaside Load Balancing}
         \includegraphics[scale=0.5]{lookaside_lb.pdf}
 
-        Client recieves assignments and \emph{directly} connects to endpoint
+        Client recieves assignments and \emph{directly} connects to endpoints.
     \end{frame}
 
-    \begin{frame}{Envoy's Discovery Protocol}
+    \begin{frame}{Management Server: Envoy's Discovery Protocol}
         \begin{itemize}
             \item Envoy is dynamically configurable using \emph{Discovery Services} (DS)
             \item It can configure
@@ -61,7 +61,7 @@
                 \item listeners (open new sockets)$\rightarrow$ Listeners Discovery Service (\emph{L}DS)
                 \item routes (map \texttt{/api} to \texttt{X}, etc.) $\rightarrow$ Route Discovery Service (\emph{R}DS)
                 \item clusters (a name + endpoints) $\rightarrow$ Cluster Discovery Service (\emph{C}DS)
-                \item endpints (address:port) $\rightarrow$ Endpoint Discovery Service (\emph{E}DS)
+                \item endpoints (address:port) $\rightarrow$ Endpoint Discovery Service (\emph{E}DS)
             \end{itemize}
         \end{itemize}
 
@@ -71,7 +71,25 @@
         xDS client/server protocol, but bidirectional stream variant exists: \emph{A}DS -- Aggregated Discovery Service
     \end{frame}
 
-    \begin{frame}{Why Is This a Good Protocol}
+    \begin{frame}{Why do you want this?}
+        We have (Kubernetes) clusters. Treat them as failure domains.
+        \begin{enumerate}
+            \item Services breaks in single cluster; drain service
+            \item Entire cluster fails; drain \emph{all} services
+        \end{enumerate}
+        Just external DNS won't cut it. You need a control plane.
+    \end{frame}
+
+    \begin{frame}{Why Is xDS a Good Protocol}
+        \begin{enumerate}
+            \item It's a sane and simple protocol
+            \item Emerging as industry standard?
+            \item gRPC itself is moving towards it (with goodies like load reporting and health checking)
+        \end{enumerate}
+        If you don't have a fancy protocol (gRPC), why not use DNS for all those "legacy" protocols?
+    \end{frame}
+
+    \begin{frame}{xDS}
         Simple (~2 gRPC messages), packed with features. TODO(miek): more.
         \begin{columns}[T]
             \begin{column}{0.5\textwidth}
@@ -99,36 +117,6 @@
         \end{enumerate}
     \end{frame}
 
-
-    \begin{frame}[plain]{\texttt{xds} Control Loop}
-        \begin{columns}
-            \begin{column}{0.5\textwidth}
-                \includegraphics[scale=0.6]{xds-bin.pdf}
-            \end{column}
-            \begin{column}{0.5\textwidth}
-                Anything implementing ADS can subscribe to the feed
-            \end{column}
-        \end{columns}
-    \end{frame}
-
-    \begin{frame}{Why do you want this?}
-        We have (Kubernetes) cluster. Treat them as failure domains.
-        \begin{enumerate}
-            \item Services breaks in single cluster; drain service
-            \item Entire cluster fails; drain \emph{all} services
-        \end{enumerate}
-        Just external DNS won't cut it. You need a control plane.
-    \end{frame}
-
-    \begin{frame}{Why xDS?}
-        \begin{enumerate}
-            \item It's a sane and simple protocol
-            \item Emerging as industry standard?
-            \item gRPC itself is moving towards it (with goodies like load reporting and health checking)
-            \item You're already using it if you installed Contour
-        \end{enumerate}
-        If you don't have a fancy protocol (gRPC), why not use DNS for all those "legacy" protocols?
-    \end{frame}
 
     \section{CoreDNS with \emph{traffic}}
 
