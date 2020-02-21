@@ -48,9 +48,17 @@
     \end{frame}
 
     \begin{frame}{Lookaside Load Balancing}
-        \includegraphics[scale=0.5]{lookaside_lb.pdf}
+        \begin{columns}
+            \begin{column}{0.7\textwidth}
+                \includegraphics[scale=0.5]{lookaside_lb.pdf}
 
-        Client recieves assignments and \emph{directly} connects to endpoints.
+                Client recieves assignments and \emph{directly} connects to endpoints.
+            \end{column}
+
+            \begin{column}{0.3\textwidth}
+                Clients can be L7 proxy, RPC impl, DNS, etc.
+            \end{column}
+        \end{columns}
     \end{frame}
 
     \begin{frame}{Management Server: Envoy's Discovery Protocol}
@@ -65,31 +73,12 @@
             \end{itemize}
         \end{itemize}
 
-        All these DSs together are called {\bf xDS}, we care about CDS/EDS.\footnote{Resporting Services also exist: Health and Load
-        Reporting: HRS, LRS - not covered in this presentation.}
+        All these DSs together are called {\bf xDS}, we care about CDS/EDS.
 
-        xDS client/server protocol, but bidirectional stream variant exists: \emph{A}DS -- Aggregated Discovery Service
+        Bidirectional stream variant $\rightarrow$ Aggregated Discovery Service (\emph{A}DS)
     \end{frame}
 
-    \begin{frame}{Why do you want this?}
-        We have (Kubernetes) clusters. Treat them as failure domains.
-        \begin{enumerate}
-            \item Services breaks in single cluster; drain service
-            \item Entire cluster fails; drain \emph{all} services
-        \end{enumerate}
-        Just external DNS won't cut it. You need a control plane.
-    \end{frame}
-
-    \begin{frame}{Why Is xDS a Good Protocol}
-        \begin{enumerate}
-            \item It's a sane and simple protocol
-            \item Emerging as industry standard?
-            \item gRPC itself is moving towards it (with goodies like load reporting and health checking)
-        \end{enumerate}
-        If you don't have a fancy protocol (gRPC), why not use DNS for all those "legacy" protocols?
-    \end{frame}
-
-    \begin{frame}{xDS}
+    \begin{frame}{xDS Protocol}
         Simple (~2 gRPC messages), packed with features. TODO(miek): more.
         \begin{columns}[T]
             \begin{column}{0.5\textwidth}
@@ -106,6 +95,24 @@
             \item call a service, i.e. \texttt{FetchEndpoints} (xDS)
             \item bidirectional stream + indicate type \texttt{type\_url} (ADS)
         \end{itemize}
+    \end{frame}
+
+    \begin{frame}{Why Is xDS a Good Protocol}
+        \begin{enumerate}
+            \item It's a sane and simple protocol
+            \item Emerging as industry standard?
+            \item gRPC itself is moving towards it (with goodies like load reporting and health checking)
+        \end{enumerate}
+        If you don't have a fancy protocol (gRPC), why not use DNS for all those "legacy" protocols?
+    \end{frame}
+
+    \begin{frame}{Why do you want this?}
+        We have (Kubernetes) clusters. Treat them as failure domains.
+        \begin{enumerate}
+            \item Services breaks in single cluster; drain service
+            \item Entire cluster fails; drain \emph{all} services
+        \end{enumerate}
+        Just external DNS won't cut it. You need a control plane.
     \end{frame}
 
     \begin{frame}{Wait? Another Service Mesh?}
