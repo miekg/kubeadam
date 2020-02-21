@@ -123,39 +123,32 @@
     \begin{frame}{Caveats}
         This is DNS, you're not changing actual routing
         At mercy of clients holding to IPs
-        With 5s TTL you should so sharp drop off in 5 - 10m
-        You're doing it to protect client; if they don't care; they will get broken
+        With 5s TTL you should so sharp drop off in 5 - 10m You're doing it to protect client; if they don't care; they will get broken
     \end{frame}
 
     \begin{frame}{Setup for Demo}
-            \includegraphics[scale=0.6]{xds-overview.pdf}
+        \begin{columns}[T]
+            \begin{column}{0.2\textwidth}
+                \includegraphics[scale=0.35]{lookaside_lb.pdf}
+            \end{column}
+            \begin{column}{0.8\textwidth}
+                \includegraphics[scale=0.6]{xds-overview.pdf}
+            \end{column}
+        \end{columns}
     \end{frame}
 
     \begin{frame}{}
         \begin{description}
-            \item[hc]
-                \begin{itemize}
-                    \item Not available in this presentation
-                    \item Will be done manually with \texttt{xdsctl}
-                \end{itemize}
-            \item[xds]
-                \begin{itemize}
-                    \item \texttt{xds} - Main control plane component
-                    \item Go binary that implements Envoy xDS v3
-                    \item \url{github.com/miekg/xds}
-                \end{itemize}
-            \item[cli]
-                \begin{itemize}
-                    \item \texttt{xdsctl} - CLI to manipulate \texttt{xds}, this is what oncallers to use
-                    \item Go binary that implements Envoy xDS v3 client side
-                    \item \url{github.com/miekg/xds/tree/master/cmd/xdsctl}
-                \end{itemize}
-            \item[dns]
-                \begin{itemize}
-                    \item \texttt{CoreDNS} - with \emph{traffic} plugin
-                    \item Go binary that implements Envoy xDS v3 ADS
-                    \item \url{github.com/coredns/coredns/tree/traffic}
-                \end{itemize}
+            \item[Health Check Server]\ \\
+                 Not available in this presentation (using \texttt{xdsctl})
+            \item[Management Server]\ \\
+                 xds - implements Envoy xDS/ADS v3 \url{github.com/miekg/xds}
+            \item[cli]\ \\
+                 xdsctl - CLI to manipulate \texttt{xds}, this is what oncallers would use -
+                 implements Envoy xDS v3 client side \url{github.com/miekg/xds/tree/master/cmd/xdsctl}
+            \item[dns]\ \\
+                 CoreDNS - with \emph{traffic} plugin -
+                 implements Envoy xDS v3 ADS \url{github.com/coredns/coredns/tree/traffic}
         \end{description}
     \end{frame}
 

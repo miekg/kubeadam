@@ -14,13 +14,13 @@ digraph xds_overview {
         xds [label="{<f0> xds|<f1> Management Server\n\n}" shape=Mrecord,penwidth=2];
     }
     subgraph sub_hc {
-        hc [label="{<f0> hc|<f1> Health Check Server\n\n}" shape=Mrecord,penwidth=2];
+        hc [label="{<f0> hc|<f1> Health Check Server\n\n}" shape=Mrecord,penwidth=1,style=dashed];
     }
     subgraph sub_coredns {
-        coredns [label="{<f0> dns|<f1> CoreDNS\n\n}" shape=Mrecord,penwidth=2];
+        coredns [label="{<f0> CoreDNS|<f1> dns\n\n}" shape=Mrecord,penwidth=2];
     }
     subgraph sub_xdsctl {
-        xdsctl [label="{<f0> cli|<f1> xdsctl\n\n}" shape=Mrecord,penwidth=2];
+        xdsctl [label="{<f0> xdsctl|<f1> cli\n\n}" shape=Mrecord,penwidth=2];
     }
     {rank=same; web_us, web_eu}
     {rank=same; coredns, xdsctl}
@@ -29,5 +29,6 @@ digraph xds_overview {
     xds -> hc
     xds -> coredns
     xds -> xdsctl
+    xdsctl -> xds
     hc -> web_eu, web_us
 }
