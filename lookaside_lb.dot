@@ -2,13 +2,14 @@ digraph traditional_lb {
     rankdir=TB
     bgcolor=transparent
     client[shape=circle]
-    lb[shape=box,penwidth=2,width=5,label="L7 Proxy\n"]
+    xds [label="Management Server\n" shape=box,penwidth=2];
     web_us[shape=oval,penwidth=2,label="US Cluster\n\n192.168.1.1:80\n192.168.1.2:80\n\n"]
     web_eu[shape=oval,penwidth=2,label="EU Cluster\n\n172.16.0.1:80\n172.16.0.2:80\n\n"]
     {rank=same; web_us, web_eu}
+    {rank=same; client, xds}
 
-    client -> lb [label="  1 "]
-    lb -> web_us [label="  2 "]
-    web_us -> lb [label="  3 "]
-    lb -> client [label="  4 "]
+    client -> xds [label="  1 "]
+    xds -> client [label="  2 "]
+    client -> web_us [label="  3 "]
+    web_us -> client [label="  4 "]
 }

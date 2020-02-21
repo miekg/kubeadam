@@ -45,6 +45,18 @@
         \end{itemize}
     \end{frame}
 
+    \begin{frame}{Traditional Load Balancing}
+        \includegraphics[scale=0.45]{traditional_lb.pdf}
+
+        The traffic traverses the proxy \emph{twice}
+    \end{frame}
+
+    \begin{frame}{Lookaside Load Balancing}
+        \includegraphics[scale=0.5]{lookaside_lb.pdf}
+
+        Client recieves assignments and \emph{directly} connects to endpoint
+    \end{frame}
+
     \begin{frame}{Envoy's Discovery Protocol}
         \begin{itemize}
             \item Envoy is dynamically configurable using \emph{Discovery Services} (DS)

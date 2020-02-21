@@ -9,3 +9,7 @@ xds.pdf: *.tex $(DOT)
 
 %.pdf: %.dot
 	dot -Tpdf $< $(FONTS) > $(basename $<).pdf
+
+.PHONY: clean
+clean:
+	rm *.pdf

@@ -11,7 +11,7 @@ digraph xds_overview {
         web_eu [label="EU Cluster\n\n172.16.0.1:80\n172.16.0.2:80\n\n"];
     }
     subgraph sub_xds {
-        xds [label="{<f0> xds|<f1> \"Envoy\" Management Server\n\n}" shape=Mrecord,penwidth=2];
+        xds [label="{<f0> xds|<f1> Management Server\n\n}" shape=Mrecord,penwidth=2];
     }
     subgraph sub_hc {
         hc [label="{<f0> hc|<f1> Health Check Server\n\n}" shape=Mrecord,penwidth=2];
