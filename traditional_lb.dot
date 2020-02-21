@@ -1,0 +1,16 @@
+digraph traditional_lb {
+    rankdir=TB
+    bgcolor=transparent
+    top[style=invisible]
+    lb[shape=box,penwidth=2,width=5,label="L7 Proxy\n\n"]
+    web_us[shape=oval,penwidth=2,label="US Cluster\n\n192.168.1.1:80\n192.168.1.2:80\n\n"]
+    web_eu[shape=oval,penwidth=2,label="EU Cluster\n\n172.16.0.1:80\n172.16.0.2:80\n\n"]
+    {rank=same; web_us, web_eu}
+
+    top -> lb [label="  1 "]
+    lb -> web_us [label="  2 "]
+    lb -> web_eu [style=dotted]
+    web_us -> lb [label="  3 "]
+    web_eu -> lb [style=dotted]
+    lb -> top [label="  4 "]
+}
